@@ -39,9 +39,9 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     // For Exhibition.
-     if (hasTimePassed()) {
-         changeGraphic(true);
-     }
+//     if (hasTimePassed()) {
+//         changeGraphic(true);
+//     }
     
     if (particles[0] != NULL && dynamic_cast<Gear*>(particles[0])) {
         // Gear.
@@ -228,7 +228,11 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    switch (key) {
+        case ' ':
+            changeGraphic(true);
+            break;
+    }
 }
 
 //--------------------------------------------------------------
