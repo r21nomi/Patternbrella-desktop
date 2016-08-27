@@ -51,7 +51,7 @@ void ofApp::update(){
         // Other graphic.
         int count = 0;
         for (Item *particle : particles) {
-            particle->update(0, 0, 0.5, 0.5);
+            particle->update(0, 0, 0.1, 0.1);
             count++;
         }
     }
