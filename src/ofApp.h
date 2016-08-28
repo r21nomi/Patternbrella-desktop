@@ -8,6 +8,7 @@
 #include "Gear.hpp"
 #include "GearController.hpp"
 #include "Fish2.hpp"
+#include "Rain.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -69,5 +70,6 @@ private:
     ofImage head;
     ofImage body;
     ofImage tail;
-		
+    
+    Rain rain;
 };

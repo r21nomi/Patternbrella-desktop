@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B6B6F261D72C0FA0010C53D /* Rain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B6B6F241D72C0FA0010C53D /* Rain.cpp */; };
 		4BB2DE091D6B220C00F8922A /* Border.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2DDFA1D6B220C00F8922A /* Border.cpp */; };
 		4BB2DE0A1D6B220C00F8922A /* Fish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2DDFC1D6B220C00F8922A /* Fish.cpp */; };
 		4BB2DE0B1D6B220C00F8922A /* Fish2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2DDFE1D6B220C00F8922A /* Fish2.cpp */; };
@@ -49,6 +50,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B6B6F241D72C0FA0010C53D /* Rain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rain.cpp; sourceTree = "<group>"; };
+		4B6B6F251D72C0FA0010C53D /* Rain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Rain.hpp; sourceTree = "<group>"; };
 		4BB2DDFA1D6B220C00F8922A /* Border.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Border.cpp; sourceTree = "<group>"; };
 		4BB2DDFB1D6B220C00F8922A /* Border.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Border.hpp; sourceTree = "<group>"; };
 		4BB2DDFC1D6B220C00F8922A /* Fish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fish.cpp; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				4B6B6F241D72C0FA0010C53D /* Rain.cpp */,
+				4B6B6F251D72C0FA0010C53D /* Rain.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -251,6 +256,7 @@
 				4BB2DE0F1D6B220C00F8922A /* Ripple.cpp in Sources */,
 				4BB2DE091D6B220C00F8922A /* Border.cpp in Sources */,
 				4BB2DE0A1D6B220C00F8922A /* Fish.cpp in Sources */,
+				4B6B6F261D72C0FA0010C53D /* Rain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
