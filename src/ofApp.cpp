@@ -34,14 +34,18 @@ void ofApp::setup(){
     
     resetTime();
     createItems();
+    
+    rain.start();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     // For Exhibition.
-//     if (hasTimePassed()) {
-//         changeGraphic(true);
-//     }
+    if (hasTimePassed()) {
+        changeGraphic(true);
+    }
+    
+    rain.updateState();
     
     if (particles[0] != NULL && dynamic_cast<Gear*>(particles[0])) {
         // Gear.
