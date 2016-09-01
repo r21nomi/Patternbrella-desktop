@@ -9,6 +9,7 @@
 #include "GearController.hpp"
 #include "Fish2.hpp"
 #include "Rain.hpp"
+#include "ofxLayerMask.h"
 
 class ofApp : public ofBaseApp{
 
@@ -41,6 +42,7 @@ private:
     bool hasTimePassed();
     void resetTime();
     int getElapsedTime();
+    float getMaskRadius();
     
     int INTERVAL_OFFSET = 20;
     int AZIMUTH_DIFF_OFFSET = 40;
@@ -72,4 +74,5 @@ private:
     ofImage tail;
     
     Rain rain;
+    ofxLayerMask masker;
 };
