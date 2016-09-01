@@ -5,7 +5,8 @@
 void ofApp::setup(){
     ofBackground(0);
     
-    ofLog(OF_LOG_NOTICE, "setup -----------------------------------------");
+    masker.setup(ofGetWidth(), ofGetHeight());
+    masker.newLayer();
     
     font.load("verdana.ttf", 24);
     
@@ -63,9 +64,28 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    for (Item *particle : particles) {
-        particle->draw();
+    ofBackground(ofColor::black);
+    
+    // Contents
+    masker.beginLayer();
+    {
+        ofClear(0, 0, 0, 255);
+        for (Item *particle : particles) {
+            particle->draw();
+        }
     }
+    masker.endLayer();
+    
+    // Mask
+    masker.beginMask();
+    {
+        ofClear(0, 0, 0, 255);
+        ofSetColor(ofColor::white);
+        ofDrawCircle(ofGetWidth() / 2, ofGetHeight() / 2, getMaskRadius());
+    }
+    masker.endMask();
+    
+    masker.draw();
 }
 
 void ofApp::createItems() {
@@ -223,6 +243,10 @@ bool ofApp::hasTimePassed() {
 
 int ofApp::getElapsedTime() {
     return ofGetElapsedTimeMillis() - startTime;
+}
+
+float ofApp::getMaskRadius() {
+    return ofGetHeight() / 2;
 }
 
 //--------------------------------------------------------------
