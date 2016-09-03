@@ -10,21 +10,39 @@ void ofApp::setup(){
     
     font.load("verdana.ttf", 24);
     
-    setGraphicId();
+    setGraphicId(getId());
     
-    imageRefs.push_back("images/fish_100_0.png");
     imageRefs.push_back("images/fish_100_1.png");
     imageRefs.push_back("images/fish_100_2.png");
     imageRefs.push_back("images/fish_100_3.png");
-    imageRefs.push_back("images/fish_100_4.png");
     imageRefs.push_back("images/cone_80_1.png");
     imageRefs.push_back("images/eye_57_1.png");
+    imageRefs.push_back("images/fish_100_4.png");
+    imageRefs.push_back("images/fish_100_5.png");
+    imageRefs.push_back("images/fish_100_5.png");
     img.load(imageRefs[graphicId]);
     img.setAnchorPercent(0.5, 0.5);
     
-    head.load("images/fish/fish_0.png");
-    body.load("images/fish/fish_1.png");
-    tail.load("images/fish/fish_2.png");
+    // Fish
+    fishImagePaths.push_back("images/fish/fish_head_1.png");
+    fishImagePaths.push_back("images/fish/fish_body_1.png");
+    fishImagePaths.push_back("images/fish/fish_tail_1.png");
+    for (string path : fishImagePaths) {
+        ofImage image;
+        image.load(path);
+        fishImages.push_back(image);
+    }
+    
+    // Flower
+    flowerTypeCount = 10;
+    for (int i = 0; i < flowerTypeCount; i++) {
+        flowerImagePaths.push_back("images/flower/flower_" + ofToString(i + 1) + ".png");
+    }
+    for (string path : flowerImagePaths) {
+        ofImage image;
+        image.load(path);
+        flowerImages.push_back(image);
+    }
     
     stiffness = 0.1;
     damping = 0.85;
@@ -37,6 +55,7 @@ void ofApp::setup(){
     createItems();
     
     rain.start();
+    
 }
 
 //--------------------------------------------------------------
@@ -89,17 +108,33 @@ void ofApp::draw(){
 }
 
 void ofApp::createItems() {
-    switch (graphicId) {
-        case 1:
+    switch (currentGraphic) {
+        case BORDER:
             createBorderItems();
             break;
             
-        case 2:
+        case RAIN:
             createRippleItems();
             break;
             
-        case 3:
+        case GEAR:
             createGearItems();
+            break;
+            
+        case CIRCLE:
+            createCircleItems();
+            break;
+            
+        case FISH2:
+            createFish2Items();
+            break;
+            
+        case FLOWER:
+            createFlowerItems();
+            break;
+            
+        case HEXAGON:
+            createHexagon();
             break;
             
         default:
@@ -110,17 +145,7 @@ void ofApp::createItems() {
             
             for (int i = 0, wLen = ofGetWidth() / (width + margin); i < wLen; i++) {
                 for (int j = 0, hLen = ofGetHeight() / (width + margin); j < hLen; j++) {
-                    Item *particle;
-                    
-                    if (graphicId == 3) {
-                        particle = new Particle(&img, ofPoint(i * (width + margin), j * (width + margin)), width);
-                        
-                    } else if (graphicId == 4) {
-                        particle = new Fish2(&head, &body, &tail, ofPoint(i * (width + margin), j * (width + margin)));
-                        
-                    } else {
-                        particle = new Fish(&img, ofPoint(i * (width + margin), j * (width + margin)), width);
-                    }
+                    Item *particle = new Fish(&img, ofPoint(i * (width + margin), j * (width + margin)), width);
                     
                     float dist = ofDist(particle->getLocation().x, particle->getLocation().y, ofGetWidth() / 2, ofGetHeight() / 2);
                     
@@ -156,6 +181,88 @@ void ofApp::createBorderItems() {
         currentYLen += bold;
     }
     random_shuffle(particles.begin(), particles.end());
+}
+
+void ofApp::createFish2Items() {
+    particles.clear();
+    
+    for (int i = 0, len = 50; i < len; i++) {
+        Item *particle = new Fish2(
+                                   &fishImages[0],
+                                   &fishImages[1],
+                                   &fishImages[2],
+                                   ofPoint(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()))
+                                   );
+        particles.push_back(particle);
+    }
+}
+
+/**
+ * Flower
+ */
+void ofApp::createFlowerItems() {
+    particles.clear();
+    
+    int maxCount = 5000;
+    int currentCount = 1;
+    float x[maxCount];
+    float y[maxCount];
+    float r[maxCount];
+    int closestIndex[maxCount];
+    
+    float minRadius = 5;
+    float maxRadius = 150;
+    
+    x[0] = ofGetWidth() / 2;
+    y[0] = ofGetHeight() / 2;
+    r[0] = maxRadius / 2;
+    closestIndex[0] = 0;
+    
+    for (int k = 0; k < 2000; k++) {
+        float newX = ofRandom(0 + maxRadius, ofGetWidth() - maxRadius);
+        float newY = ofRandom(0 + maxRadius, ofGetHeight() - maxRadius);
+        float newR = minRadius;
+        
+        bool intersection = false;
+        
+        for (int j = 0; j < currentCount; j++) {
+            float d = ofDist(newX, newY, x[j], y[j]);
+            if (d < (newR + r[j])) {
+                intersection = true;
+                break;
+            }
+        }
+        
+        if (intersection == false) {
+            float newRadius = ofGetWidth();
+            for (int i = 0; i < currentCount; i++) {
+                float d = ofDist(newX, newY, x[i], y[i]);
+                if (newRadius > d - r[i]) {
+                    newRadius = d - r[i];
+                    closestIndex[currentCount] = i;
+                }
+            }
+            
+            if (newRadius > maxRadius) {
+                newRadius = maxRadius;
+            }
+            
+            x[currentCount] = newX;
+            y[currentCount] = newY;
+            r[currentCount] = newRadius;
+            currentCount++;
+        }
+    }
+    
+    for (int i = 0 ; i < currentCount; i++) {
+        Item *item = new Flower(
+                                &flowerImages[i % flowerTypeCount],
+                                ofPoint((int)x[i], (int)y[i]),
+                                r[i] * 2,
+                                r[i] * 2
+                                );
+        particles.push_back(item);
+    }
 }
 
 /**
@@ -201,30 +308,121 @@ void ofApp::createGearItems() {
     gearController->setItems(particles);
 }
 
+/**
+ * Circle
+ */
+void ofApp::createCircleItems() {
+    particles.clear();
+    
+    for (int i = 50, len = 50; i > 0; i -= 4) {
+        Circle *circle = new Circle(
+                                    ofPoint(ofGetWidth() / 2, ofGetHeight() / 2),
+                                    ofGetWidth() / len * i,
+                                    ofGetWidth() / len * i,
+                                    6,
+                                    ofGetWidth(),
+                                    ofColor(ofRandom(255), ofRandom(255), ofRandom(255))
+                                    );
+        Item *item = circle;
+        particles.push_back(item);
+    }
+}
+
+/**
+ * Hexagon
+ */
+void ofApp::createHexagon() {
+    particles.clear();
+    
+    int diameter = 300;
+    int row = 0;
+    for (int x = 0, width = ofGetWidth() + diameter * 2; x < width; x += diameter) {
+        int line = 0;
+        row++;
+        
+        for (int y = 0, height = ofGetHeight() + diameter * 2; y < height; y += diameter) {
+            vector<ofColor> colors;
+            colors.push_back(ofColor(230, 40, 100));
+            colors.push_back(ofColor(70, 190, 210));
+            
+            line++;
+            // 対角線の距離
+            float diagonalDist = sqrt(3) * diameter / 4 * 2;
+            int verticalOffset = line % 2 == 0 ? 0 : diagonalDist / 2;
+            Hexagon *item = new Hexagon(
+                                        ofPoint(
+                                                x - (diameter - diagonalDist) * row + verticalOffset,
+                                                y - diagonalDist / (2 * sqrt(3)) * line
+                                                ),
+                                        diameter / 2,
+                                        colors,
+                                        (int)ofRandom(2) % 2 == 0 ? 0 : 1,
+                                        ofRandom(1, 3)
+                                        );
+            particles.push_back(item);
+        }
+    }
+}
+
 float ofApp::getVelocity(float destination, float location, float velocity) {
     float force = stiffness * (destination - location);
     return damping * (velocity + force);
 }
 
-void ofApp::setGraphicId() {
-    graphicId = getId();
-    ofLog(OF_LOG_NOTICE, "ID : " + ofToString(graphicId));
+void ofApp::setGraphicId(int id) {
+    graphicId = id;
+    
+    switch (graphicId) {
+        case 1:
+            currentGraphic = BORDER;
+            break;
+            
+        case 2:
+            currentGraphic = RAIN;
+            break;
+            
+        case 3:
+            currentGraphic = GEAR;
+            break;
+            
+        case 4:
+            currentGraphic = FISH2;
+            break;
+            
+        case 5:
+            currentGraphic = CIRCLE;
+            break;
+            
+        case 6:
+            currentGraphic = FLOWER;
+            break;
+            
+        case 7:
+            currentGraphic = HEXAGON;
+            break;
+            
+        default:
+            currentGraphic = FISH;
+            break;
+    }
 }
 
 void ofApp::changeGraphic(bool changetoNext) {
+    int totalGraphicCount = 8;
+    
     if (changetoNext) {
-        graphicId++;
-        if (imageRefs.size() <= graphicId) {
-            graphicId = 0;
+        setGraphicId(graphicId + 1);
+        if (graphicId > totalGraphicCount) {
+            setGraphicId(1);
         }
     } else {
-        graphicId--;
+        setGraphicId(graphicId - 1);
         if (graphicId < 0) {
-            graphicId = imageRefs.size() - 1;
+            setGraphicId(totalGraphicCount);
         }
     }
-    img.clear();
-    img.load(imageRefs[graphicId]);
+//    img.clear();
+//    img.load(imageRefs[graphicId]);
     createItems();
     resetTime();
 }
@@ -251,7 +449,7 @@ float ofApp::getMaskRadius() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    
 }
 
 //--------------------------------------------------------------
@@ -265,45 +463,45 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+void ofApp::dragEvent(ofDragInfo dragInfo){
+    
 }

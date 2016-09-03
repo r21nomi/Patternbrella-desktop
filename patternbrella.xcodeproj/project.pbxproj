@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4B6B6F261D72C0FA0010C53D /* Rain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B6B6F241D72C0FA0010C53D /* Rain.cpp */; };
+		4B939BFF1D7AD1A2005B912A /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B939BFD1D7AD1A2005B912A /* Circle.cpp */; };
+		4B939C041D7AD1EF005B912A /* Flower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B939C001D7AD1EF005B912A /* Flower.cpp */; };
+		4B939C051D7AD1EF005B912A /* Hexagon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B939C021D7AD1EF005B912A /* Hexagon.cpp */; };
 		4BB2DE091D6B220C00F8922A /* Border.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2DDFA1D6B220C00F8922A /* Border.cpp */; };
 		4BB2DE0A1D6B220C00F8922A /* Fish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2DDFC1D6B220C00F8922A /* Fish.cpp */; };
 		4BB2DE0B1D6B220C00F8922A /* Fish2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BB2DDFE1D6B220C00F8922A /* Fish2.cpp */; };
@@ -54,6 +57,12 @@
 /* Begin PBXFileReference section */
 		4B6B6F241D72C0FA0010C53D /* Rain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rain.cpp; sourceTree = "<group>"; };
 		4B6B6F251D72C0FA0010C53D /* Rain.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Rain.hpp; sourceTree = "<group>"; };
+		4B939BFD1D7AD1A2005B912A /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Circle.cpp; path = ../../../../../../../Desktop/src/Circle.cpp; sourceTree = "<group>"; };
+		4B939BFE1D7AD1A2005B912A /* Circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Circle.hpp; path = ../../../../../../../Desktop/src/Circle.hpp; sourceTree = "<group>"; };
+		4B939C001D7AD1EF005B912A /* Flower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Flower.cpp; path = ../../../../../../../Desktop/src/Flower.cpp; sourceTree = "<group>"; };
+		4B939C011D7AD1EF005B912A /* Flower.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Flower.hpp; path = ../../../../../../../Desktop/src/Flower.hpp; sourceTree = "<group>"; };
+		4B939C021D7AD1EF005B912A /* Hexagon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hexagon.cpp; path = ../../../../../../../Desktop/src/Hexagon.cpp; sourceTree = "<group>"; };
+		4B939C031D7AD1EF005B912A /* Hexagon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Hexagon.hpp; path = ../../../../../../../Desktop/src/Hexagon.hpp; sourceTree = "<group>"; };
 		4BB2DDFA1D6B220C00F8922A /* Border.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Border.cpp; sourceTree = "<group>"; };
 		4BB2DDFB1D6B220C00F8922A /* Border.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Border.hpp; sourceTree = "<group>"; };
 		4BB2DDFC1D6B220C00F8922A /* Fish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fish.cpp; sourceTree = "<group>"; };
@@ -87,7 +96,7 @@
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* patternbrellaDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = patternbrellaDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
-		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
+		E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofApp.cpp; path = src/ofApp.cpp; sourceTree = SOURCE_ROOT; };
 		E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = ofApp.h; path = src/ofApp.h; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -192,6 +201,12 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4B939C001D7AD1EF005B912A /* Flower.cpp */,
+				4B939C011D7AD1EF005B912A /* Flower.hpp */,
+				4B939C021D7AD1EF005B912A /* Hexagon.cpp */,
+				4B939C031D7AD1EF005B912A /* Hexagon.hpp */,
+				4B939BFD1D7AD1A2005B912A /* Circle.cpp */,
+				4B939BFE1D7AD1A2005B912A /* Circle.hpp */,
 				4BB2DDFA1D6B220C00F8922A /* Border.cpp */,
 				4BB2DDFB1D6B220C00F8922A /* Border.hpp */,
 				4BB2DDFC1D6B220C00F8922A /* Fish.cpp */,
@@ -316,9 +331,12 @@
 				4BD47B831D784D17003773BA /* ofxLayerMask.cpp in Sources */,
 				4BB2DE0C1D6B220C00F8922A /* Gear.cpp in Sources */,
 				4BB2DE0E1D6B220C00F8922A /* Particle.cpp in Sources */,
+				4B939C041D7AD1EF005B912A /* Flower.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				4B939C051D7AD1EF005B912A /* Hexagon.cpp in Sources */,
 				4BB2DE0B1D6B220C00F8922A /* Fish2.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				4B939BFF1D7AD1A2005B912A /* Circle.cpp in Sources */,
 				4BB2DE0D1D6B220C00F8922A /* GearController.cpp in Sources */,
 				4BB2DE0F1D6B220C00F8922A /* Ripple.cpp in Sources */,
 				4BB2DE091D6B220C00F8922A /* Border.cpp in Sources */,
