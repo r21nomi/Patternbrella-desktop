@@ -71,6 +71,34 @@ void ofApp::update(){
         // Gear.
         gearController->update(normAccelX, normAccelY);
         
+    } else if (particles[0] != NULL && dynamic_cast<Circle*>(particles[0])) {
+        vector<Item*>::iterator it = particles.begin();
+        vector<Item*> items;
+        while (it != particles.end()) {
+            Circle *item = dynamic_cast<Circle*>(*it);
+            if (item->isOverRange()) {
+                it = particles.erase(it);
+                items.push_back(item);
+            } else {
+                ++it;
+            }
+        }
+        particles.insert(particles.end(), items.begin(), items.end());
+        
+        for (Item *particle : particles) {
+            particle->update(dummyLocation.x, dummyLocation.y, normAccelX, normAccelY);
+        }
+    } else if (particles[0] != NULL && dynamic_cast<Flower*>(particles[0])) {
+        // Flower
+        for (Item *item : particles) {
+            Flower *flower = dynamic_cast<Flower*>(item);
+            if (abs(normAccelX) > 0.4 || abs(normAccelY) > 0.4) {
+                flower->update(normAccelX, normAccelY);
+            } else {
+                flower->update(dummyLocation.x, dummyLocation.y, normAccelX, normAccelY);
+            }
+        }
+        
     } else {
         // Other graphic.
         int count = 0;
@@ -295,7 +323,7 @@ void ofApp::createGearItems() {
     int margin = 30;
     
     for (int x = 0, width = ofGetWidth(); x < width; x += (diameter + margin)) {
-        for (int y = 0, height = ofGetHeight(); y < height; y += (diameter + margin)) {
+        for (int y = 0, height = ofGetHeight() + (diameter + margin); y < height; y += (diameter + margin)) {
             Gear *gear = new Gear(
                                   ofPoint(x, y),
                                   diameter,
