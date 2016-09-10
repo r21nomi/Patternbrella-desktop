@@ -47,7 +47,7 @@ void ofApp::setup(){
     stiffness = 0.1;
     damping = 0.85;
     interval = changeDelay = lastAzimuth = azimuthDiff = 0;
-    timeUntilChangeGraphic = 5 * 1000;
+    timeUntilChangeGraphic = 30 * 1000;
     normAccelX = normAccelY = 0;
     gearController = new GearController();
     
@@ -74,8 +74,9 @@ void ofApp::update(){
     } else {
         // Other graphic.
         int count = 0;
+        float velocity = rain.isHeavyRain() ? 2.0 : 0.1;
         for (Item *particle : particles) {
-            particle->update(0, 0, 0.1, 0.1);
+            particle->update(0, 0, velocity, velocity);
             count++;
         }
     }
@@ -401,14 +402,14 @@ void ofApp::setGraphicId(int id) {
             currentGraphic = HEXAGON;
             break;
             
-        default:
-            currentGraphic = FISH;
-            break;
+//        default:
+//            currentGraphic = FISH;
+//            break;
     }
 }
 
 void ofApp::changeGraphic(bool changetoNext) {
-    int totalGraphicCount = 8;
+    int totalGraphicCount = 7;
     
     if (changetoNext) {
         setGraphicId(graphicId + 1);
@@ -417,7 +418,7 @@ void ofApp::changeGraphic(bool changetoNext) {
         }
     } else {
         setGraphicId(graphicId - 1);
-        if (graphicId < 0) {
+        if (graphicId < 1) {
             setGraphicId(totalGraphicCount);
         }
     }

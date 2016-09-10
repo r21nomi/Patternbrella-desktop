@@ -38,7 +38,6 @@ private:
         BORDER,
         RAIN,
         GEAR,
-        FISH,
         FISH2,
         CIRCLE,
         FLOWER,

@@ -34,8 +34,8 @@ private:
     bool shouldStartHeavyRain();
     bool shouldFinishHeavyRain();
     
-    int LIGHT_RAIN_DURATION = 10 * 1000;
-    int HEAVY_RAIN_DURATION = 5 * 1000;
+    int LIGHT_RAIN_DURATION = 120 * 1000;
+    int HEAVY_RAIN_DURATION = 20 * 1000;
 };
 
 #endif /* Rain_hpp */
